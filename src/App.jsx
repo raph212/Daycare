@@ -1,9 +1,14 @@
-import Layout from "./Sidebar";
+import { useState } from "react";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import OtpPage from "./pages/OtpPage";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
-  return (
-    <Layout>
-      <p className="text-gray-400">Dashboard content goes here</p>
-    </Layout>
-  );
+  const [page, setPage] = useState("landing");
+
+  if (page === "login") return <LoginPage onBack={() => setPage("landing")} onOtp={() => setPage("otp")} />;
+  if (page === "otp") return <OtpPage onBack={() => setPage("login")} onVerify={() => setPage("dashboard")} />;
+  if (page === "dashboard") return <Dashboard activePage="Dashboard" onLogout={() => setPage("landing")} />;
+  return <LandingPage onLogin={() => setPage("login")} />;
 }
