@@ -3,6 +3,10 @@ import { LayoutDashboard, Activity, Heart, Image, Video, MessageSquare, CreditCa
 import DashboardHome from "./DashboardHome";
 import Activities from "./Activities";
 import Health from "./Health";
+import LiveView from "./LiveView";
+import Messages from "./Messages";
+import Payments from "./Payments";
+import SettingsPage from "./SettingsPage";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard },
@@ -23,6 +27,10 @@ export default function Dashboard({ activePage: initialPage, onLogout }) {
     if (active === "Dashboard") return <DashboardHome />;
     if (active === "Activities") return <Activities />;
     if (active === "Health") return <Health />;
+    if (active === "Live View") return <LiveView />;
+    if (active === "Messages") return <Messages />;
+    if (active === "Payments") return <Payments />;
+    if (active === "Settings") return <SettingsPage />;
     return (
       <div className="flex items-center justify-center h-full">
         <p className="text-gray-400 text-sm">{active} page coming soon...</p>
@@ -32,7 +40,6 @@ export default function Dashboard({ activePage: initialPage, onLogout }) {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Sidebar */}
       <aside className="w-60 bg-white border-r border-gray-100 flex flex-col shrink-0">
         <div className="flex items-center gap-2.5 px-5 py-5 border-b border-gray-100">
           <div className="w-10 h-10 rounded-xl bg-orange-400 flex items-center justify-center text-xl">🐣</div>
@@ -53,19 +60,15 @@ export default function Dashboard({ activePage: initialPage, onLogout }) {
           ))}
         </nav>
 
-        {/* Logout Button at bottom of sidebar */}
         <div className="p-3 border-t border-gray-100">
-          <button
-            onClick={() => setShowLogoutModal(true)}
-            className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-400 hover:bg-red-50 hover:text-red-500 transition-colors"
-          >
+          <button onClick={() => setShowLogoutModal(true)}
+            className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-400 hover:bg-red-50 hover:text-red-500 transition-colors">
             <LogOut size={17} />
             Logout
           </button>
         </div>
       </aside>
 
-      {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="h-[60px] bg-white border-b border-gray-100 flex items-center justify-between px-6 shrink-0">
           <h1 className="text-xl font-medium text-gray-900">{active}</h1>
@@ -87,7 +90,6 @@ export default function Dashboard({ activePage: initialPage, onLogout }) {
         <main className="flex-1 overflow-auto p-6">{renderPage()}</main>
       </div>
 
-      {/* Logout Confirmation Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm text-center">
@@ -97,16 +99,12 @@ export default function Dashboard({ activePage: initialPage, onLogout }) {
             <h2 className="text-lg font-bold text-gray-900 mb-2">Logout?</h2>
             <p className="text-gray-400 text-sm mb-6">Are you sure you want to logout from LittleSteps?</p>
             <div className="flex gap-3">
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
+              <button onClick={() => setShowLogoutModal(false)}
+                className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
                 Cancel
               </button>
-              <button
-                onClick={onLogout}
-                className="flex-1 py-2.5 rounded-xl bg-red-400 text-white text-sm font-medium hover:bg-red-500 transition-colors"
-              >
+              <button onClick={onLogout}
+                className="flex-1 py-2.5 rounded-xl bg-red-400 text-white text-sm font-medium hover:bg-red-500 transition-colors">
                 Yes, Logout
               </button>
             </div>
